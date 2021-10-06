@@ -4,6 +4,8 @@ import API from '../API.js';
 import { POSTER_SIZE, BACKDROP_SIZE, IMG_BASE_URL, API_KEY, IMAGE_BASE_URL } from '../config';
 //Components
 import HeroImage from "./HeroImage/HeroImage.component";
+import Grid from './Grid/Grid.component'
+import Thumb from './Thumb/Thumb.component'
 //Hook
 import {useHomeFetch} from '../hooks/useHomeFetch'
 //Img
@@ -24,6 +26,22 @@ const Home = () => {
         /> 
         : null
         }
+        <Grid header='Popular Movies'>
+            {state.results.map(movie => (
+                <Thumb 
+                    key={movie.id}
+                    clickable
+                    image={
+                        movie.poster_path 
+                        ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path 
+                        : NoImage
+
+                    }
+                    movieId={movie.id}
+                />
+
+            ))}
+        </Grid>
     </>
     );
 }
